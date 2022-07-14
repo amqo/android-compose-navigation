@@ -1,7 +1,9 @@
 package com.amqo.composenavigation
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -24,19 +26,31 @@ fun DetailScreen(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
-        Text(
-            modifier = Modifier.clickable {
+        Column(modifier = Modifier
+            .clickable {
                 navController.navigate(route = Screen.Home.route) {
                     popUpTo(Screen.Home.route) {
                         inclusive = true
                     }
                 }
             },
-            text = "Detail $id $name",
-            color = Color.Red,
-            style = MaterialTheme.typography.h3,
-            fontWeight = FontWeight.Bold
-        )
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                text = "Detail $id",
+                color = Color.Red,
+                style = MaterialTheme.typography.h3,
+                fontWeight = FontWeight.Bold
+            )
+            if (name.isNotBlank()) {
+                Text(
+                    text = name,
+                    color = Color.Red,
+                    style = MaterialTheme.typography.h3
+                )
+            }
+        }
     }
 }
 

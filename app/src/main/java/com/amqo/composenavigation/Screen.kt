@@ -2,22 +2,31 @@ package com.amqo.composenavigation
 
 const val DETAIL_ARGUMENT_ID = "id"
 const val DETAIL_ARGUMENT_NAME = "name"
+const val DETAIL_ARGUMENT_SURNAME = "surname"
 
 sealed class Screen(val route: String) {
 
     object Home: Screen(route = "home_screen")
 
-    object Detail: Screen(route = "detail_screen/{$DETAIL_ARGUMENT_ID}/{$DETAIL_ARGUMENT_NAME}") {
+    object Detail: Screen(route = "detail_screen/" +
+            "{$DETAIL_ARGUMENT_ID}?" +
+            "$DETAIL_ARGUMENT_NAME={$DETAIL_ARGUMENT_NAME}&" +
+            "$DETAIL_ARGUMENT_SURNAME={$DETAIL_ARGUMENT_SURNAME}") {
 
-        fun passId(id: Int): String {
-            return this.route.replace("{$DETAIL_ARGUMENT_ID}", id.toString())
+        fun passArgs(
+            id: Int,
+            name: String? = null,
+            surname: String? = null
+        ): String {
+            val nameFixed = name ?: ""
+            val surnameFixed = surname ?: ""
+            return "${passId(id)}?" +
+                    "$DETAIL_ARGUMENT_NAME=$nameFixed&" +
+                    "$DETAIL_ARGUMENT_SURNAME=$surnameFixed"
         }
 
-        fun passIdAndName(
-            id: Int,
-            name: String
-        ): String {
-            return passId(id).replace("{$DETAIL_ARGUMENT_NAME}", name)
+        private fun passId(id: Int): String {
+            return "detail_screen/${id}"
         }
     }
 }

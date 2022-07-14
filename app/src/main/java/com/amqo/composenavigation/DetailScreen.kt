@@ -16,7 +16,9 @@ import androidx.navigation.compose.rememberNavController
 
 @Composable
 fun DetailScreen(
-    navController: NavController
+    navController: NavController,
+    id: Int,
+    name: String
 ) {
     Box(
         modifier = Modifier.fillMaxSize(),
@@ -30,7 +32,7 @@ fun DetailScreen(
                     }
                 }
             },
-            text = "Detail",
+            text = "Detail $id $name",
             color = Color.Red,
             style = MaterialTheme.typography.h3,
             fontWeight = FontWeight.Bold
@@ -42,6 +44,6 @@ fun DetailScreen(
 @Composable
 fun DetailScreenPreview() {
     DetailScreen(
-        navController = rememberNavController()
+        navController = rememberNavController(), 1, "preview"
     )
 }

@@ -1,4 +1,4 @@
-package com.amqo.composenavigation
+package com.amqo.composenavigation.screens
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -15,6 +15,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.amqo.composenavigation.navigation.Screen
 
 @Composable
 fun DetailScreen(

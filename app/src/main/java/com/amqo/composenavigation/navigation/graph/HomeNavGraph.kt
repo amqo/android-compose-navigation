@@ -1,24 +1,22 @@
-package com.amqo.composenavigation
+package com.amqo.composenavigation.navigation.graph
 
-import androidx.compose.runtime.Composable
-import androidx.navigation.NavHostController
-import androidx.navigation.NavType
-import androidx.navigation.compose.NavHost
+import androidx.navigation.*
 import androidx.navigation.compose.composable
-import androidx.navigation.navArgument
+import com.amqo.composenavigation.navigation.*
+import com.amqo.composenavigation.screens.DetailScreen
+import com.amqo.composenavigation.screens.HomeScreen
 
-@Composable
-fun SetupNavGraph(
-    navHostController: NavHostController
+fun NavGraphBuilder.homeNavGraph(
+    navController: NavController
 ) {
-    NavHost(
-        navController = navHostController,
-        startDestination = Screen.Home.route
+    navigation(
+        startDestination = Screen.Home.route,
+        route = HOME_ROUTE
     ) {
         composable(
             route = Screen.Home.route,
         ) {
-            HomeScreen(navController = navHostController)
+            HomeScreen(navController = navController)
         }
         composable(
             route = Screen.Detail.route,
@@ -40,7 +38,7 @@ fun SetupNavGraph(
             val nameArgument = it.arguments?.getString(DETAIL_ARGUMENT_NAME)
             val surnameArgument = it.arguments?.getString(DETAIL_ARGUMENT_SURNAME)
             DetailScreen(
-                navController = navHostController,
+                navController = navController,
                 id = idArgument,
                 name = "$nameArgument $surnameArgument"
             )

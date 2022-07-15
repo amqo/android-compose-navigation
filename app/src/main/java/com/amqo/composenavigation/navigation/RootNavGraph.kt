@@ -4,7 +4,9 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navigation
 import com.amqo.composenavigation.screens.AuthScreen
+import com.amqo.composenavigation.screens.home.HomeScreenContent
 
 @Composable
 fun RootNavGraph(
@@ -15,13 +17,18 @@ fun RootNavGraph(
         startDestination = Graph.HOME,
         route = Graph.ROOT
     ) {
-        homeNavGraph(navController = navController)
+        navigation(
+            startDestination = HomeScreenContent.Home.route,
+            route = Graph.HOME
+        ) {
+            homeNavGraph(navController = navController)
+        }
         composable(route = Graph.AUTHENTICATION) {
-            AuthScreen(onNavigateBack = {
+            AuthScreen {
                 navController.navigate(Graph.HOME) {
                     popUpTo(Graph.HOME)
                 }
-            })
+            }
         }
     }
 }

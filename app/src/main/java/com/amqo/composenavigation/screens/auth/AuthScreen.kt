@@ -15,8 +15,8 @@ import com.amqo.composenavigation.screens.auth.AuthScreenContent
 
 @Composable
 fun AuthScreen(
-    onNavigateBack: () -> Unit,
-    navController: NavHostController = rememberNavController()
+    navController: NavHostController = rememberNavController(),
+    onNavigateBack: () -> Unit
 ) {
     Scaffold(
         bottomBar = {

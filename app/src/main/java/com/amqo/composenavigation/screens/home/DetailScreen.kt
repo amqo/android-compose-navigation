@@ -15,7 +15,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.amqo.composenavigation.navigation.Screen
 
 @Composable
 fun DetailScreen(
@@ -29,8 +28,8 @@ fun DetailScreen(
     ) {
         Column(modifier = Modifier
             .clickable {
-                navController.navigate(route = Screen.Home.route) {
-                    popUpTo(Screen.Home.route) {
+                navController.navigate(route = HomeScreenContent.Home.route) {
+                    popUpTo(HomeScreenContent.Home.route) {
                         inclusive = true
                     }
                 }

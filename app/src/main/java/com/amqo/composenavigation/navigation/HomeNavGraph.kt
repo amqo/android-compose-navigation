@@ -1,28 +1,23 @@
-package com.amqo.composenavigation.navigation.graph
+package com.amqo.composenavigation.navigation
 
 import androidx.navigation.*
 import androidx.navigation.compose.composable
-import com.amqo.composenavigation.navigation.DETAIL_ARGUMENT_ID
-import com.amqo.composenavigation.navigation.DETAIL_ARGUMENT_NAME
-import com.amqo.composenavigation.navigation.DETAIL_ARGUMENT_SURNAME
-import com.amqo.composenavigation.navigation.Screen
-import com.amqo.composenavigation.screens.home.DetailScreen
-import com.amqo.composenavigation.screens.home.HomeScreen
+import com.amqo.composenavigation.screens.home.*
 
 fun NavGraphBuilder.homeNavGraph(
     navController: NavController
 ) {
     navigation(
-        startDestination = Screen.Home.route,
+        startDestination = HomeScreenContent.Home.route,
         route = Graph.HOME
     ) {
         composable(
-            route = Screen.Home.route,
+            route = HomeScreenContent.Home.route,
         ) {
             HomeScreen(navController = navController)
         }
         composable(
-            route = Screen.Detail.route,
+            route = HomeScreenContent.Detail.route,
             arguments = listOf(
                 navArgument(DETAIL_ARGUMENT_ID) {
                     type = NavType.IntType

@@ -14,12 +14,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.rememberNavController
-import com.amqo.composenavigation.navigation.Screen
-import com.amqo.composenavigation.navigation.graph.Graph
 
 @Composable
-fun LoginScreen(navController: NavController) {
+fun LoginScreen(
+    onNavigateBack: () -> Unit,
+    navController: NavController
+) {
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center,
@@ -29,7 +31,10 @@ fun LoginScreen(navController: NavController) {
         ) {
             Text(
                 modifier = Modifier.clickable {
-                    navController.navigate(Screen.SignUp.route)
+                    navController.navigate(AuthScreenContent.SigUp.route) {
+                        popUpTo(navController.graph.findStartDestination().id)
+                        launchSingleTop = true
+                    }
                 },
                 text = "Login",
                 color = MaterialTheme.colors.primary,
@@ -40,9 +45,7 @@ fun LoginScreen(navController: NavController) {
                 modifier = Modifier
                     .padding(top = 150.dp)
                     .clickable {
-                        navController.navigate(Graph.HOME) {
-                            popUpTo(Graph.HOME)
-                        }
+                        onNavigateBack()
                     },
                 text = "Go Back",
                 style = MaterialTheme.typography.h6,
@@ -56,6 +59,7 @@ fun LoginScreen(navController: NavController) {
 @Composable
 fun LoginScreenPreview() {
     LoginScreen(
+        onNavigateBack = {},
         navController = rememberNavController()
     )
 }

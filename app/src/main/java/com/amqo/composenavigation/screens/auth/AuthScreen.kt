@@ -10,17 +10,23 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.amqo.composenavigation.navigation.graph.BottomNavGraph
+import com.amqo.composenavigation.navigation.AuthNavGraph
+import com.amqo.composenavigation.screens.auth.AuthScreenContent
 
 @Composable
-fun MainScreen() {
-    val navController = rememberNavController()
+fun AuthScreen(
+    onNavigateBack: () -> Unit,
+    navController: NavHostController = rememberNavController()
+) {
     Scaffold(
         bottomBar = {
             BottomBar(navController = navController)
         }
     ) {
-        BottomNavGraph(navController = navController)
+        AuthNavGraph(
+            onNavigateBack = onNavigateBack,
+            navController = navController
+        )
     }
 }
 
@@ -29,26 +35,29 @@ fun BottomBar(
   navController: NavHostController
 ) {
     val screens = listOf(
-        BottomBarScreen.Home,
-        BottomBarScreen.Profile
+        AuthScreenContent.Login,
+        AuthScreenContent.SigUp
     )
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
 
-    BottomNavigation {
-        screens.forEach { screen ->
-            AddItem(
-                screen = screen,
-                currentDestination = currentDestination,
-                navController = navController
-            )
+    val isDestinationCorrect = screens.any { destination -> destination.route == currentDestination?.route }
+    if (isDestinationCorrect) {
+        BottomNavigation {
+            screens.forEach { screen ->
+                AddItem(
+                    screen = screen,
+                    currentDestination = currentDestination,
+                    navController = navController
+                )
+            }
         }
     }
 }
 
 @Composable
 fun RowScope.AddItem(
-    screen: BottomBarScreen,
+    screen: AuthScreenContent,
     currentDestination: NavDestination?,
     navController: NavHostController
 ) {

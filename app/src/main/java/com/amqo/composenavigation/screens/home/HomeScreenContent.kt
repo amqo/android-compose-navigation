@@ -1,14 +1,14 @@
-package com.amqo.composenavigation.navigation
+package com.amqo.composenavigation.screens.home
 
 const val DETAIL_ARGUMENT_ID = "id"
 const val DETAIL_ARGUMENT_NAME = "name"
 const val DETAIL_ARGUMENT_SURNAME = "surname"
 
-sealed class Screen(val route: String) {
+sealed class HomeScreenContent(val route: String) {
 
-    object Home: Screen(route = "home_screen")
+    object Home: HomeScreenContent(route = "home_screen")
 
-    object Detail: Screen(route = "detail_screen/" +
+    object Detail: HomeScreenContent(route = "detail_screen/" +
             "{$DETAIL_ARGUMENT_ID}?" +
             "$DETAIL_ARGUMENT_NAME={$DETAIL_ARGUMENT_NAME}&" +
             "$DETAIL_ARGUMENT_SURNAME={$DETAIL_ARGUMENT_SURNAME}") {
@@ -29,7 +29,4 @@ sealed class Screen(val route: String) {
             return "detail_screen/${id}"
         }
     }
-
-    object Login: Screen(route = "login_screen")
-    object SignUp: Screen(route = "signup_screen")
 }

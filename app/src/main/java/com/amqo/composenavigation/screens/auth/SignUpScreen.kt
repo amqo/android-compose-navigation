@@ -12,6 +12,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.rememberNavController
 
 @Composable
@@ -22,7 +23,10 @@ fun SignUpScreen(navController: NavController) {
     ) {
         Text(
             modifier = Modifier.clickable {
-                navController.popBackStack()
+                navController.navigate(AuthScreenContent.Login.route) {
+                    popUpTo(navController.graph.findStartDestination().id)
+                    launchSingleTop = true
+                }
             },
             text = "Sign Up",
             color = Color.Red,

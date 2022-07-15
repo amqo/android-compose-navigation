@@ -4,10 +4,6 @@ const val DETAIL_ARGUMENT_ID = "id"
 const val DETAIL_ARGUMENT_NAME = "name"
 const val DETAIL_ARGUMENT_SURNAME = "surname"
 
-const val AUTHENTICATION_ROUTE = "authentication"
-const val HOME_ROUTE = "home"
-const val ROOT_ROUTE = "root"
-
 sealed class Screen(val route: String) {
 
     object Home: Screen(route = "home_screen")

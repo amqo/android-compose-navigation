@@ -9,7 +9,7 @@ import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.amqo.composenavigation.navigation.graph.SetupNavGraph
+import com.amqo.composenavigation.navigation.graph.SetupRootNavGraph
 import com.amqo.composenavigation.ui.theme.ComposeNavigationTheme
 
 class MainActivity : ComponentActivity() {
@@ -26,7 +26,7 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colors.background
                 ) {
                     navController = rememberNavController()
-                    SetupNavGraph(navHostController = navController)
+                    SetupRootNavGraph(navHostController = navController)
                 }
             }
         }

@@ -1,4 +1,4 @@
-package com.amqo.composenavigation.screens
+package com.amqo.composenavigation.screens.auth
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -15,9 +15,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.amqo.composenavigation.navigation.AUTHENTICATION_ROUTE
-import com.amqo.composenavigation.navigation.HOME_ROUTE
 import com.amqo.composenavigation.navigation.Screen
+import com.amqo.composenavigation.navigation.graph.Graph
 
 @Composable
 fun LoginScreen(navController: NavController) {
@@ -41,8 +40,8 @@ fun LoginScreen(navController: NavController) {
                 modifier = Modifier
                     .padding(top = 150.dp)
                     .clickable {
-                        navController.navigate(HOME_ROUTE) {
-                            popUpTo(HOME_ROUTE)
+                        navController.navigate(Graph.HOME) {
+                            popUpTo(Graph.HOME)
                         }
                     },
                 text = "Go Back",
